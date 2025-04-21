@@ -1,12 +1,13 @@
 from rest_framework import serializers
 from cinema.models import Order, Ticket, MovieSession
 
+
 class TicketSerializer(serializers.ModelSerializer):
     movie_session = serializers.SerializerMethodField()
 
     class Meta:
         model = Ticket
-        fields = ('id', 'row', 'seat', 'movie_session')
+        fields = ("id", "row", "seat", "movie_session")
 
     def get_movie_session(self, obj):
         return {
@@ -17,9 +18,10 @@ class TicketSerializer(serializers.ModelSerializer):
             "cinema_hall_capacity": obj.movie_session.cinema_hall.capacity
         }
 
+
 class OrderSerializer(serializers.ModelSerializer):
     tickets = TicketSerializer(many=True, read_only=True)
 
     class Meta:
         model = Order
-        fields = ('id', 'tickets', 'created_at')
+        fields = ("id", "tickets", "created_at")
