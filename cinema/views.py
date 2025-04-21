@@ -3,8 +3,10 @@ from rest_framework.pagination import PageNumberPagination
 from cinema.models import Order
 from cinema.serializers import OrderSerializer
 
+
 class OrderPagination(PageNumberPagination):
     page_size = 10
+
 
 class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = OrderSerializer
